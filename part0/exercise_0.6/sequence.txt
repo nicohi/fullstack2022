@@ -1,0 +1,9 @@
+# https://www.websequencediagrams.com/
+note over browser:
+spa.js creates note object and adds date after user clicks "Save"
+note is appended to list
+redraw is called and the new note is rendered
+end note
+
+browser->server: HTTP POST /exampleapp/new_note_spa
+server->browser: HTTP 201
