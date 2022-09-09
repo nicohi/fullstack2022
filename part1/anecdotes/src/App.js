@@ -45,6 +45,7 @@ const App = () => {
       <Button label='next anecdote' onClick={setRandState(anecdotes.length, setSelected)}/>
       <h1>Anecdote with most votes</h1>
       <div>{anecdotes[bestId]}</div>
+      <div>has {readPoints(bestId)} votes</div>
     </>
   )
 }
