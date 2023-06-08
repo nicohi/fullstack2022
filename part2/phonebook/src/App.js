@@ -15,7 +15,7 @@ const App = () => {
                  .then((initialPersons => setPersons(initialPersons)))
   }, [])
 
-  const addName = (event) => {
+  const addName = event => {
     event.preventDefault()
     if (persons.map(p => p.name).includes(newName)) alert(`${newName} is already added to phonebook`)
     else {
@@ -28,6 +28,17 @@ const App = () => {
     }
     setNewName('')
     setNewNumber('')
+  }
+
+  const deletId = id => event => {
+    const name = persons.filter(p => p.id === id)[0].name
+    if (window.confirm(`Delete ${name}?`))
+    {
+      personService.delet(id)
+                   .then(_ => {
+                     setPersons(persons.filter(p => p.id !== id))
+                   })
+    }
   }
 
   const handleNameChange = (event) => setNewName(event.target.value)
@@ -44,7 +55,7 @@ const App = () => {
       <PersonForm addName={addName} newName={newName} handleNameChange={handleNameChange}
                   newNumber={newNumber} handleNumberChange={handleNumberChange} />
       <h2>Numbers</h2>
-      <Persons persons={persons} filterBy={filterBy}/>
+      <Persons persons={persons} filterBy={filterBy} deletId={deletId}/>
     </div>
   )
 }
