@@ -29,8 +29,11 @@ const App = () => {
         setPersons(persons.map(p => p.id !== person.id ? p : np))
         setMessage(['success', `Updated ${person.name}`])
         setTimeout(() => setMessage(['',null]), 3000)
+      }).catch(error => {
+        console.log(error.response.data.error)
+        setMessage(['error', error.response.data.error])
+        setTimeout(() => setMessage(['',null]), 6000)
       })
-
     }
     else {
       const personObject = {
@@ -42,6 +45,10 @@ const App = () => {
                      setPersons(persons.concat(p))
                      setMessage(['success', `Added ${p.name}`])
                      setTimeout(() => setMessage(['',null]), 3000)
+                   }).catch(error => {
+                     console.log(error.response.data.error)
+                     setMessage(['error', error.response.data.error])
+                     setTimeout(() => setMessage(['',null]), 6000)
                    })
     }
     setNewName('')
